@@ -49,7 +49,7 @@
     #lightbox img { max-width:100%; max-height:100%; border-radius:10px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
     .mobile-nav.open { transform:translateY(0); opacity:1; pointer-events:auto; }
   </style>
-</head>
+<style id="gallery-upgrade-style">.zoom-img{cursor:zoom-in}.product-gallery-note{font-size:12px;color:#78716c;margin-top:10px}.thickness-figure{margin-top:16px;background:#f6f3ed;border-radius:14px;padding:12px}.thickness-figure img{width:100%;height:auto;max-height:390px;object-fit:contain}.thickness-figure figcaption{font-size:12px;color:#78716c;margin-top:8px}.gallery-lightbox{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.93);display:none;align-items:center;justify-content:center;flex-direction:column;padding:50px 65px}.gallery-lightbox.show{display:flex}.gallery-lightbox img{max-width:100%;max-height:78vh;object-fit:contain}.gallery-lightbox button{position:absolute;background:rgba(255,255,255,.17);color:#fff;border:1px solid #aaa;border-radius:50%;height:44px;width:44px;font-size:26px;cursor:pointer}.gallery-lightbox .prev{left:12px;top:50%}.gallery-lightbox .next{right:12px;top:50%}.gallery-lightbox .close{right:16px;top:12px}.gallery-lightbox .caption{color:white;text-align:center;margin-top:12px;font-size:14px}.gallery-lightbox .count{color:#ccc;font-size:12px;margin-top:4px}.gallery-lightbox button:focus-visible{outline:3px solid white}</style></head>
 <body>
 
 <div class="social-float">
@@ -151,7 +151,7 @@
                  data-full="images/decorative.jpg">
           </div>
         </div>
-        <p class="mt-2 text-xs text-stone-400">点击图片可查看大图</p>
+        <figure class="thickness-figure"><img class="zoom-img" src="images/decorative-thickness.svg" data-full="images/decorative-thickness.svg" alt="decorative 3、6、9、12、15、18、21、25、30毫米厚度比例对比示意图" loading="lazy"><figcaption>按毫米比例绘制的厚度对比示意，并非实物横截面照片；各厚度是否可供货请以报价为准。</figcaption></figure><p class="mt-2 text-xs text-stone-400">点击图片可查看大图；使用左右方向键切换。</p>
       </div>
 
       <div>
@@ -222,7 +222,7 @@
                  data-full="images/decorative.jpg">
           </div>
         </div>
-        <p class="mt-2 text-xs text-stone-400">点击图片可查看大图</p>
+        <figure class="thickness-figure"><img class="zoom-img" src="images/decorative-thickness.svg" data-full="images/decorative-thickness.svg" alt="decorative 3、6、9、12、15、18、21、25、30毫米厚度比例对比示意图" loading="lazy"><figcaption>按毫米比例绘制的厚度对比示意，并非实物横截面照片；各厚度是否可供货请以报价为准。</figcaption></figure><p class="mt-2 text-xs text-stone-400">点击图片可查看大图；使用左右方向键切换。</p>
       </div>
 
       <div>
@@ -293,7 +293,7 @@
                  data-full="images/decorative.jpg">
           </div>
         </div>
-        <p class="mt-2 text-xs text-stone-400">点击图片可查看大图</p>
+        <figure class="thickness-figure"><img class="zoom-img" src="images/decorative-thickness.svg" data-full="images/decorative-thickness.svg" alt="decorative 3、6、9、12、15、18、21、25、30毫米厚度比例对比示意图" loading="lazy"><figcaption>按毫米比例绘制的厚度对比示意，并非实物横截面照片；各厚度是否可供货请以报价为准。</figcaption></figure><p class="mt-2 text-xs text-stone-400">点击图片可查看大图；使用左右方向键切换。</p>
       </div>
 
       <div>
@@ -381,7 +381,7 @@
       </div>
       <div class="mt-6 flex flex-col gap-1 border-t border-white/10 pt-6 text-center text-xs sm:flex-row sm:justify-between sm:text-left">
         <p>© 2026 林海木业 版权所有</p>
-        <p class="text-white/40">产品图片来源于 Unsplash，遵循 Unsplash License 免费商用授权</p>
+        <p class="text-white/40">图片含示意素材；实际规格以样品及报价为准</p>
       </div>
     </div>
   </footer>
@@ -413,13 +413,7 @@
       });
     });
   });
-  const lightbox = document.getElementById('lightbox');
-  const lbImg = lightbox.querySelector('img');
-  document.querySelectorAll('.zoom-img').forEach(img => {
-    img.addEventListener('click', () => { lbImg.src = img.dataset.full; lightbox.classList.add('show'); });
-  });
-  lightbox.addEventListener('click', () => { lightbox.classList.remove('show'); lbImg.src = ''; });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { lightbox.classList.remove('show'); lbImg.src=''; } });
+
 </script>
-</body>
+<script id="gallery-upgrade-script">(function(){let old=document.getElementById('lightbox');if(old)old.remove();let box=document.createElement('div');box.className='gallery-lightbox';box.setAttribute('role','dialog');box.setAttribute('aria-modal','true');box.setAttribute('aria-label','产品图片查看器');box.innerHTML='<button class="close" aria-label="关闭">×</button><button class="prev" aria-label="上一张">‹</button><img alt="产品放大图"><button class="next" aria-label="下一张">›</button><div class="caption"></div><div class="count"></div>';document.body.appendChild(box);let groups=[],active=[],idx=0,lastFocus=null;document.querySelectorAll('img.zoom-img').forEach(img=>{let section=img.closest('section[id]')||img.closest('section')||document.body;let group=groups.find(g=>g.el===section);if(!group){group={el:section,imgs:[]};groups.push(group)}group.imgs.push(img);img.tabIndex=0;img.setAttribute('role','button');img.setAttribute('aria-label','放大图片：'+img.alt);function open(){lastFocus=document.activeElement;active=group.imgs;idx=active.indexOf(img);show();box.classList.add('show');document.body.style.overflow='hidden';box.querySelector('.close').focus()}img.addEventListener('click',open);img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}})});function show(){let im=active[idx];if(!im)return;box.querySelector('img').src=im.getAttribute('data-full')||im.src;box.querySelector('img').alt=im.alt;box.querySelector('.caption').textContent=im.alt;box.querySelector('.count').textContent=(idx+1)+' / '+active.length}function shift(n){if(!active.length)return;idx=(idx+n+active.length)%active.length;show()}function close(){box.classList.remove('show');document.body.style.overflow='';box.querySelector('img').removeAttribute('src');if(lastFocus&&lastFocus.focus)lastFocus.focus()}box.querySelector('.close').onclick=close;box.querySelector('.prev').onclick=()=>shift(-1);box.querySelector('.next').onclick=()=>shift(1);box.addEventListener('click',e=>{if(e.target===box)close()});document.addEventListener('keydown',e=>{if(!box.classList.contains('show'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft'){e.preventDefault();shift(-1)}if(e.key==='ArrowRight'){e.preventDefault();shift(1)}});let sx=null;box.addEventListener('touchstart',e=>{sx=e.changedTouches[0].screenX},{passive:true});box.addEventListener('touchend',e=>{if(sx===null)return;let d=e.changedTouches[0].screenX-sx;if(Math.abs(d)>40)shift(d>0?-1:1);sx=null},{passive:true});})();</script></body>
 </html>
